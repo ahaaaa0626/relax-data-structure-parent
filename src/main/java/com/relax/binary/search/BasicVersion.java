@@ -37,7 +37,7 @@ public class BasicVersion {
 
 
     /**
-     *
+     * 思路：寻找到后一直往左边缩直至结束边界
      * @param a
      * @param target
      * @return return left most target index in array while exist,otherwise return -1
@@ -66,6 +66,26 @@ public class BasicVersion {
         }
 
         return candidate;
+    }
+
+
+    /**
+     * 思路：遍历到只剩下只剩下一个
+     * @param a
+     * @param target
+     * @return
+     */
+    public static int binarySearchBalance(int[] a, int target) {
+        int i = 0, j = a.length;
+        while (1 < j - i) {
+            int m = (i + j) >>> 1;
+            if (target < a[m]) {
+                j = m;
+            } else {
+                i = m;
+            }
+        }
+        return (a[i] == target) ? i : -1;
     }
 
 }
