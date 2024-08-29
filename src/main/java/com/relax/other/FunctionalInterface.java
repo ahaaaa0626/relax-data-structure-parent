@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 /**
  * @Author relax
  * @Date 2024/8/29 14:37
- * @Description TODO
+ * @Description functional interface
  * @Version 1.0
  **/
 public class FunctionalInterface {

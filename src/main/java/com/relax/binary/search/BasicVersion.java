@@ -3,7 +3,7 @@ package com.relax.binary.search;
 /**
  * @Author relax
  * @Date 2024/8/16 15:12
- * @Description TODO
+ * @Description basic binary search
  * @Version 1.0
  **/
 public class BasicVersion {

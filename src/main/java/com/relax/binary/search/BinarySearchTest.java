@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @Author relax
  * @Date 2024/8/16 16:08
- * @Description TODO
+ * @Description binary search test
  * @Version 1.0
  **/
 public class BinarySearchTest {
