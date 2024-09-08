@@ -13,16 +13,17 @@ import java.util.LinkedList;
 public class TowerOfHanoi {
 
     public static void main(String[] args) {
-        StopWatch stopWatch = new StopWatch();
+        StopWatch stopWatch = new StopWatch("汉诺塔");
         stopWatch.start();
         LinkedList<Integer> a = new LinkedList<>();
         LinkedList<Integer> b = new LinkedList<>();
         LinkedList<Integer> c = new LinkedList<>();
-        int num = 30;
+        int num = 10;
         init(num, a);
         move(num, a, b, c);
         print(a, b, c);
         stopWatch.stop();
+
         System.out.println(stopWatch.prettyPrint());
     }
 
