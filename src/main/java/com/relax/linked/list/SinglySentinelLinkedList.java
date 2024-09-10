@@ -1,14 +1,20 @@
 package com.relax.linked.list;
 
+import java.util.Iterator;
+
 /**
  * @Author relax
  * @Date 2024/9/8 11:19
- * @Description 单向链表
+ * @Description 单向带哨兵链表
  * @Version 1.0
  **/
-public class SinglyLinkedList {
+public class SinglySentinelLinkedList implements Iterable<Integer> {
 
     Node head;
+
+    public SinglySentinelLinkedList() {
+        this.head = new Node(-1, this.head);
+    }
 
     public void remove(int index) {
         Node node = findNode(index);
@@ -17,8 +23,8 @@ public class SinglyLinkedList {
         }
 
         if (index == 0){
-            if (this.head != null) {
-                this.head = this.head.next;
+            if (this.head.next != null) {
+                this.head.next = this.head.next.next;
                 return;
             } else {
                 throw illegalIndex(index);
@@ -32,7 +38,6 @@ public class SinglyLinkedList {
     }
 
     public void insert(int value, int index) {
-        Node node = this.head;
         if (index == 0) {
             addFirst(value);
             return;
@@ -48,7 +53,7 @@ public class SinglyLinkedList {
     private Node findNode(int index) {
 
         Node node = this.head;
-        for (int position = 1; node != null; position++, node = node.next) {
+        for (int position = 0; node != null; position++, node = node.next) {
             if (position == index) {
                 return node;
             }
@@ -56,9 +61,6 @@ public class SinglyLinkedList {
         return null;
     }
 
-    private IllegalArgumentException illegalIndex(int index) {
-        return new IllegalArgumentException(String.format("index [%d] 不合法%n", index));
-    }
 
     public int getNode(int index) {
         Node node = findNode(index);
@@ -69,11 +71,11 @@ public class SinglyLinkedList {
     }
 
     public void addFirst(int value) {
-        this.head = new Node(value, this.head);
+        this.head.next = new Node(value, this.head.next);
     }
 
     public void addLast(int value) {
-        Node node = this.head;
+        Node node = this.head.next;
         if (node == null) {
             addFirst(value);
             return;
@@ -95,6 +97,46 @@ public class SinglyLinkedList {
             node = node.next;
         }
     }
+
+    private IllegalArgumentException illegalIndex(int index) {
+        return new IllegalArgumentException(String.format("index [%d] 不合法%n", index));
+    }
+
+    @Override
+    public Iterator<Integer> iterator() {
+        return new Iterator<Integer>() {
+            Node p = head.next;
+
+            @Override
+            public boolean hasNext() { // 是否有下一个元素
+                return p != null;
+            }
+
+            @Override
+            public Integer next() { // 返回当前值, 并指向下一个元素
+                int v = p.value;
+                p = p.next;
+                return v;
+            }
+        };
+    }
+
+    private class NodeIterator implements Iterator<Integer> {
+        Node p = head.next;
+
+        @Override
+        public boolean hasNext() { // 是否有下一个元素
+            return p != null;
+        }
+
+        @Override
+        public Integer next() { // 返回当前值, 并指向下一个元素
+            int v = p.value;
+            p = p.next;
+            return v;
+        }
+    }
+
 
     private static class Node {
         int value;
